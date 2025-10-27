@@ -1,5 +1,7 @@
 
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using Lists;
 
 namespace Trees
@@ -8,55 +10,65 @@ namespace Trees
     {
         private T Value;
         //TODO #1: Declare a member variable called "Children" as a list of TreeNode<T> objects
-        
+        List<TreeNode<T>> Children = new List<TreeNode<T>>();
 
         public TreeNode(T value)
         {
             //TODO #2: Initialize member variables/attributes
-            
+            Value = value;
         }
 
         public string ToString(int depth, int index)
         {
             //TODO #3: Uncomment the code below
             
-            //string output = null;
-            //string leftSpace = null;
-            //for (int i = 0; i < depth; i++) leftSpace += " ";
-            //if (leftSpace != null) leftSpace += "->";
+            string output = null;
+            string leftSpace = null;
+            for (int i = 0; i < depth; i++) leftSpace += " ";
+            if (leftSpace != null) leftSpace += "->";
 
-            //output += $"{leftSpace}[{Value}]\n";
+            output += $"{leftSpace}[{Value}]\n";
 
-            //for (int childIndex = 0; childIndex < Children.Count(); childIndex++)
-            //{
-            //    TreeNode<T> child = Children.Get(childIndex);
-            //    output += child.ToString(depth + 1, childIndex);
-            //}
-            //return output;
+            for (int childIndex = 0; childIndex < Children.Count(); childIndex++)
+            {
+                TreeNode<T> child = Children.Get(childIndex);
+                output += child.ToString(depth + 1, childIndex);
+            }
+            return output;
             
-            return null;
         }
 
         public TreeNode<T> Add(T value)
         {
-            //TODO #4: Add a new instance of class GenericTreeNode<T> with Value=value. Return the instance we just created
-            
-            return null;
-            
+            //TODO #4: Add a new instance of class TreeNode<T> with Value=value. Return the instance we just created
+            TreeNode<T> newTreeNode = new TreeNode<T>(value);
+            Children.Add(newTreeNode);
+            return newTreeNode;
         }
 
         public int Count()
         {
             //TODO #5: Return the total number of elements in this tree
-            
-            return 0;
+            int total = 1;
+
+            if (Children.Get(0) == null)
+            {
+                return total;
+            }
+            else
+            {
+                foreach (TreeNode<T> children in Children)
+                {
+                    total += children.Count();
+                }
+            }
+            return total;
             
         }
 
         public int Height()
         {
-            //TODO #6: Return the height of this tree
-            
+            //TODO #6: Return the height of this tree 
             return 0;
             
         }
