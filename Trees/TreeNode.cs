@@ -66,20 +66,61 @@ namespace Trees
             
         }
 
+        
         public int Height()
         {
-            //TODO #6: Return the height of this tree 
-            return 0;
-            
+            int height = 0;
+            //TODO #6: Return the height of this tree
+            if (Children.Count() == 0)
+            {
+                return height;
+            }
+            else
+            {
+                height += 1;
+                int heightASumar = 0;
+                foreach (TreeNode<T> children in Children)
+                {
+                    foreach (TreeNode<T> children2 in Children) {
+                        if (children.Height() > children2.Height())
+                        {
+                            heightASumar = children.Height();
+                        }
+                        else
+                        {
+                            heightASumar = children2.Height();
+                        }
+                    }
+                }
+                height += heightASumar;
+            }
+            return height;
         }
 
-        
 
-        
+
+
         public void Remove(T value)
         {
             //TODO #7: Remove the child node that has Value=value. Apply recursively
-            
+            int count = 1;
+            foreach (TreeNode<T> children in Children)
+            {
+                while (!children.Value.Equals(value))
+                {
+                    count++;
+                }
+                if (children.Value.Equals(value))
+                {
+                    Children.Remove(count);
+                    return;
+                }
+                else
+                {
+                    Remove(children);
+                }
+            }
+            return;
         }
 
         public TreeNode<T> Find(T value)
