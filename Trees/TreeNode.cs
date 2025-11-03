@@ -103,30 +103,44 @@ namespace Trees
         public void Remove(T value)
         {
             //TODO #7: Remove the child node that has Value=value. Apply recursively
-            int count = 1;
-            foreach (TreeNode<T> children in Children)
+
+            int count = 0;
+
+            foreach (TreeNode<T> child in Children)
             {
-                while (!children.Value.Equals(value))
-                {
-                    count++;
-                }
-                if (children.Value.Equals(value))
+                if (child.Value.Equals(value))
                 {
                     Children.Remove(count);
-                    return;
                 }
                 else
                 {
-                    Remove(children);
+                    count++;
                 }
             }
-            return;
+            
+            foreach (TreeNode<T> child in Children)
+            {
+                child.Remove(value);
+            }            
         }
 
         public TreeNode<T> Find(T value)
         {
             //TODO #8: Return the node that contains this value (it might be this node or a child). Apply recursively
-            
+            if (this.Value != null && this.Value.Equals(value))
+            {
+                return this;
+            }
+
+            foreach (TreeNode<T> child in Children)
+                {
+                    TreeNode<T> result = child.Find(value);
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+
             return null;
         }
 
