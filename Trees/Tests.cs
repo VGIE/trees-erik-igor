@@ -85,7 +85,7 @@ namespace Trees
             {
                 onError($"Error. Count() returned {count} instead of 9 after Remove(3)");
                 return false;
-            }
+            } 
 
             TreeNode<int> found = tree.RootNode.Find(12);
             if (found == null)
