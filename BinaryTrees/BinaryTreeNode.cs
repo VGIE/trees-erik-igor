@@ -47,7 +47,7 @@ namespace BinaryTrees
             //          -If the current node has a lower key that the new node (use CompareTo()), the new node should be on this node's right side.
             //          -If the current node and the new node have the same key, just update this node's value with the new node's value
 
-            if (node.Key.CompareTo(Key) > 0)
+            if (node.Key.CompareTo(Key) < 0)
             {
                 if (LeftChild == null)
                 {
@@ -59,7 +59,7 @@ namespace BinaryTrees
                 }
             }
 
-            if (node.Key.CompareTo(Key) < 0)
+            if (node.Key.CompareTo(Key) > 0)
             {
                 if (RightChild == null)
                 {
