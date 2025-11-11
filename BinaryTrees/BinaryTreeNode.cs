@@ -183,9 +183,53 @@ namespace BinaryTrees
             //so this method returns the node with which this node needs to be replaced. If this node isn't the
             //one we are looking for, we will return this, so that the parent node can replace LeftChild/RightChild
             //with the same node it had.
-            
-            return null;
-            
+
+
+            if (key.CompareTo(Key) < 0)
+            {
+                if (LeftChild != null)
+                {
+                    LeftChild = LeftChild.Remove(key);
+                }
+            }
+            else if (key.CompareTo(Key) > 0)
+            {
+                if (RightChild != null)
+                {
+                    RightChild = RightChild.Remove(key);
+                }
+            }
+            else
+            {
+
+                if (LeftChild == null && RightChild == null)
+                {
+                    return null;
+                }
+                if (LeftChild == null)
+                {
+                    return RightChild;
+                }
+
+                if (RightChild == null)
+                {
+                    return LeftChild;
+                }
+                    
+
+                
+                BinaryTreeNode<TKey, TValue> nuevoHijo = RightChild;
+                while (nuevoHijo.LeftChild != null)
+                {
+                    nuevoHijo = nuevoHijo.LeftChild;
+                }
+                
+                Key = nuevoHijo.Key;
+                Value = nuevoHijo.Value;
+
+                RightChild = RightChild.Remove(nuevoHijo.Key);
+            }
+            return this;  
         }
 
         public int KeysToArray(TKey[] keys, int index)
